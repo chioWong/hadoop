@@ -221,6 +221,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
  * .getAllPropertiesByTag("HDFS")</tt> or <tt>conf.getAllPropertiesByTags
  * (Arrays.asList("YARN","SECURITY"))</tt>.</p>
  */
+// Hadoop 主配置文件
 @InterfaceAudience.Public
 @InterfaceStability.Stable
 public class Configuration implements Iterable<Map.Entry<String,String>>,
