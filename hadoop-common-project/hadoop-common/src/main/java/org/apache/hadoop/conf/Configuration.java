@@ -226,14 +226,18 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 @InterfaceStability.Stable
 public class Configuration implements Iterable<Map.Entry<String,String>>,
                                       Writable {
+					      
+					      
   private static final Logger LOG =
       LoggerFactory.getLogger(Configuration.class);
 
+					      
   private static final Logger LOG_DEPRECATION =
       LoggerFactory.getLogger(
           "org.apache.hadoop.conf.Configuration.deprecation");
   private static final Set<String> TAGS = ConcurrentHashMap.newKeySet();
 
+  // 默认为true,则在加载解析配置文件中,不打印日志;方便调试的配置					      
   private boolean quietmode = true;
 
   private static final String DEFAULT_STRING_CHECK =
@@ -243,6 +247,7 @@ public class Configuration implements Iterable<Map.Entry<String,String>>,
   private boolean restrictSystemProps = restrictSystemPropsDefault;
   private boolean allowNullValueProperties = false;
 
+					      
   private static class Resource {
     private final Object resource;
     private final String name;
@@ -299,6 +304,7 @@ public class Configuration implements Iterable<Map.Entry<String,String>>,
   
   /**
    * List of configuration resources.
+   * 保存所有通过 addResource()方法添加的configuration对象的资源
    */
   private ArrayList<Resource> resources = new ArrayList<Resource>();
   
@@ -824,7 +830,9 @@ public class Configuration implements Iterable<Map.Entry<String,String>>,
    * If the parameter {@code loadDefaults} is false, the new instance
    * will not load resources from the default files. 
    * @param loadDefaults specifies whether to load from the default files
-   */
+   * 
+   * 确定是否加载默认资源
+   */					   
   public Configuration(boolean loadDefaults) {
     this.loadDefaults = loadDefaults;
 
